@@ -2,14 +2,14 @@ package pl.skleptest.tests;
 
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.ITestResult;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
 import pl.skleptest.pages.HomePage;
 import pl.skleptest.pages.LoginPage;
 
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.StandardCopyOption;
+
+import static org.testng.Assert.assertTrue;
 
 public class RegisterTest {
     @Test
@@ -27,5 +27,17 @@ public class RegisterTest {
         loginPage.loginUser("michal+123456678@gmail.com", "michal+123456678@gmail.com");
 
         loginPage.takeScreenshot("login_screenshot");
+
+        assertTrue(false);
+    }
+
+
+    @AfterMethod
+    public void checkIfTestWasSuccessfull(ITestResult result) {
+        if (result.getStatus() == ITestResult.FAILURE) {
+            System.out.println("Test się nie udał");
+        } else if (result.getStatus() == ITestResult.SUCCESS) {
+            System.out.println("Test się udał");
+        }
     }
 }
